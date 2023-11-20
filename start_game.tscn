@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbm62v4xpy8bk"]
+
+[ext_resource type="Script" path="res://Scripts/StartGame.cs" id="1_62hiq"]
+[ext_resource type="Texture2D" uid="uid://bu42yew0biq4e" path="res://Images/StartGame/StartBg.jpg" id="1_cv308"]
+[ext_resource type="Texture2D" uid="uid://b65h4ofl3xh2x" path="res://Images/StartGame/PlayButton.png" id="2_1o6py"]
+[ext_resource type="Texture2D" uid="uid://dmhpbk0ci8ttv" path="res://Images/StartGame/PlayButtonHover.png" id="3_t8i74"]
+[ext_resource type="FontFile" uid="uid://dmdrbajuddyx" path="res://Fonts/COOPBL.TTF" id="4_lx64v"]
+
+[node name="startGame" type="Node2D"]
+script = ExtResource("1_62hiq")
+
+[node name="background" type="Sprite2D" parent="."]
+position = Vector2(500.356, 499.25)
+scale = Vector2(0.975867, 0.97412)
+texture = ExtResource("1_cv308")
+
+[node name="StartButton" type="TextureButton" parent="."]
+offset_left = 311.0
+offset_top = 698.0
+offset_right = 711.0
+offset_bottom = 884.0
+texture_normal = ExtResource("2_1o6py")
+texture_hover = ExtResource("3_t8i74")
+
+[node name="Label" type="Label" parent="StartButton"]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 19.0
+offset_right = 366.0
+offset_bottom = 167.0
+theme_override_fonts/font = ExtResource("4_lx64v")
+theme_override_font_sizes/font_size = 70
+text = "Play"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true

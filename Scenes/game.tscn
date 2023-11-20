@@ -1,0 +1,195 @@
+[gd_scene load_steps=20 format=3 uid="uid://ddbljh6ahw7kw"]
+
+[ext_resource type="Texture2D" uid="uid://bdp5i4kyilbl1" path="res://Images/GameBoard/Board.png" id="1_safgp"]
+[ext_resource type="Script" path="res://Scripts/Game.cs" id="1_texeg"]
+[ext_resource type="Script" path="res://Scripts/FruitFabric.cs" id="3_3gsas"]
+[ext_resource type="PackedScene" uid="uid://d2583v432mbys" path="res://Assets/Fruits/Apple.tscn" id="4_hytae"]
+[ext_resource type="PackedScene" uid="uid://cbbljjjpsne37" path="res://Assets/Fruits/Grape.tscn" id="5_lq7ql"]
+[ext_resource type="PackedScene" uid="uid://bjo5hnoglxtrq" path="res://Assets/Fruits/Strawberry.tscn" id="6_c38uk"]
+[ext_resource type="Texture2D" uid="uid://8henkfopdapq" path="res://Images/Order.png" id="7_j0lk7"]
+[ext_resource type="Texture2D" uid="uid://hab56x7yjmg7" path="res://Images/OrderHover.png" id="8_ysurh"]
+[ext_resource type="Texture2D" uid="uid://boyfnbg8sj1ko" path="res://Images/StarYellow.png" id="10_ibuqt"]
+[ext_resource type="Script" path="res://Scripts/GameOverPanel.cs" id="11_manvo"]
+[ext_resource type="Texture2D" uid="uid://dyo30wnuptv6j" path="res://Images/GameOver/GreyTransparent.png" id="11_tx1t8"]
+[ext_resource type="FontFile" uid="uid://dmdrbajuddyx" path="res://Fonts/COOPBL.TTF" id="11_xkh4f"]
+[ext_resource type="Texture2D" uid="uid://ylro2k8iexdr" path="res://Images/PopupBackgroundFull.png" id="12_jioyd"]
+[ext_resource type="Texture2D" uid="uid://dw2f1nwg4sb34" path="res://Images/Button.png" id="13_4ae33"]
+[ext_resource type="Texture2D" uid="uid://1pfkgfw024j7" path="res://Images/ButtonHover.png" id="14_11nms"]
+[ext_resource type="Script" path="res://Scripts/GameModel.cs" id="16_dkwol"]
+[ext_resource type="Script" path="res://Scripts/GamePresenter.cs" id="17_eokxo"]
+[ext_resource type="Script" path="res://Scripts/OrderController.cs" id="18_03hb1"]
+[ext_resource type="Script" path="res://Scripts/GameView.cs" id="18_yk4je"]
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("_gameView", "_gamePresenter", "_gameModel")]
+script = ExtResource("1_texeg")
+_gameView = NodePath("GameView")
+_gamePresenter = NodePath("GamePresenter")
+_gameModel = NodePath("GameModel")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(500, 500)
+scale = Vector2(1.2475, 1.25)
+texture = ExtResource("1_safgp")
+
+[node name="Board" type="Node2D" parent="."]
+position = Vector2(238, 175)
+
+[node name="Cells" type="Node2D" parent="Board"]
+
+[node name="Elements" type="Node2D" parent="Board"]
+
+[node name="Fabric" type="Node" parent="." node_paths=PackedStringArray("_game")]
+script = ExtResource("3_3gsas")
+_fruits = Array[PackedScene]([ExtResource("4_hytae"), ExtResource("5_lq7ql"), ExtResource("6_c38uk")])
+_game = NodePath("../GamePresenter")
+
+[node name="UI" type="Node" parent="."]
+
+[node name="OrderButton1" type="TextureButton" parent="UI"]
+offset_left = 284.0
+offset_top = 889.0
+offset_right = 384.0
+offset_bottom = 989.0
+texture_normal = ExtResource("7_j0lk7")
+texture_hover = ExtResource("8_ysurh")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/OrderButton1"]
+position = Vector2(48, 48)
+
+[node name="Apple" parent="UI/OrderButton1/Sprite2D" instance=ExtResource("4_hytae")]
+
+[node name="OrderButton2" type="TextureButton" parent="UI"]
+offset_left = 414.0
+offset_top = 889.0
+offset_right = 514.0
+offset_bottom = 989.0
+texture_normal = ExtResource("7_j0lk7")
+texture_hover = ExtResource("8_ysurh")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/OrderButton2"]
+position = Vector2(48, 48)
+
+[node name="Grape" parent="UI/OrderButton2/Sprite2D" instance=ExtResource("5_lq7ql")]
+
+[node name="PointsIco" type="Sprite2D" parent="UI"]
+position = Vector2(690, 940)
+scale = Vector2(0.289372, 0.298931)
+texture = ExtResource("10_ibuqt")
+
+[node name="Points" type="Label" parent="UI"]
+offset_left = 757.0
+offset_top = 899.0
+offset_right = 829.0
+offset_bottom = 972.0
+theme_override_colors/font_color = Color(1, 0.776471, 0, 1)
+theme_override_fonts/font = ExtResource("11_xkh4f")
+theme_override_font_sizes/font_size = 60
+text = "0
+"
+
+[node name="OrdersCount" type="Label" parent="UI"]
+offset_left = 93.0
+offset_top = 903.0
+offset_right = 227.0
+offset_bottom = 976.0
+theme_override_colors/font_color = Color(1, 0.776471, 0, 1)
+theme_override_fonts/font = ExtResource("11_xkh4f")
+theme_override_font_sizes/font_size = 60
+text = "0/10
+"
+
+[node name="GameOverPanel" type="Panel" parent="UI" node_paths=PackedStringArray("_btnOk", "_points")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("11_manvo")
+_btnOk = NodePath("ButtonOk")
+_points = NodePath("Points")
+
+[node name="TextureButton2" type="TextureButton" parent="UI/GameOverPanel"]
+layout_mode = 0
+offset_right = 996.0
+offset_bottom = 998.0
+texture_normal = ExtResource("11_tx1t8")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/GameOverPanel"]
+position = Vector2(504, 490)
+texture = ExtResource("12_jioyd")
+
+[node name="Game over" type="Label" parent="UI/GameOverPanel"]
+layout_mode = 0
+offset_left = 334.0
+offset_top = 269.0
+offset_right = 655.0
+offset_bottom = 342.0
+theme_override_colors/font_color = Color(0.705882, 1, 0.580392, 1)
+theme_override_fonts/font = ExtResource("11_xkh4f")
+theme_override_font_sizes/font_size = 60
+text = "Game over
+"
+
+[node name="PointsLabel" type="Label" parent="UI/GameOverPanel"]
+layout_mode = 0
+offset_left = 335.0
+offset_top = 427.0
+offset_right = 633.0
+offset_bottom = 500.0
+theme_override_colors/font_color = Color(1, 0.776471, 0, 1)
+theme_override_fonts/font = ExtResource("11_xkh4f")
+theme_override_font_sizes/font_size = 60
+text = "Score:
+"
+
+[node name="Points" type="Label" parent="UI/GameOverPanel"]
+layout_mode = 0
+offset_left = 578.0
+offset_top = 428.0
+offset_right = 681.0
+offset_bottom = 501.0
+theme_override_colors/font_color = Color(1, 0.776471, 0, 1)
+theme_override_fonts/font = ExtResource("11_xkh4f")
+theme_override_font_sizes/font_size = 60
+text = "99
+"
+
+[node name="ButtonOk" type="TextureButton" parent="UI/GameOverPanel"]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 529.0
+offset_right = 610.0
+offset_bottom = 622.0
+texture_normal = ExtResource("13_4ae33")
+texture_hover = ExtResource("14_11nms")
+
+[node name="Ok" type="Label" parent="UI/GameOverPanel/ButtonOk"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 10.0
+offset_right = 154.0
+offset_bottom = 83.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("11_xkh4f")
+theme_override_font_sizes/font_size = 60
+text = "Ok
+"
+
+[node name="GameModel" type="Node" parent="."]
+script = ExtResource("16_dkwol")
+
+[node name="GamePresenter" type="Node" parent="." node_paths=PackedStringArray("_fabric", "_orderController")]
+script = ExtResource("17_eokxo")
+_fabric = NodePath("../Fabric")
+_orderController = NodePath("OrderController")
+
+[node name="OrderController" type="Node" parent="GamePresenter" node_paths=PackedStringArray("_fabric")]
+script = ExtResource("18_03hb1")
+_fabric = NodePath("../../Fabric")
+
+[node name="GameView" type="Node" parent="." node_paths=PackedStringArray("_orderButton1", "_orderButton2", "_pointsLabel", "_ordersLabel", "_gameOverPanel", "_cellsContainer", "_elementsContainer")]
+script = ExtResource("18_yk4je")
+_orderButton1 = NodePath("../UI/OrderButton1")
+_orderButton2 = NodePath("../UI/OrderButton2")
+_pointsLabel = NodePath("../UI/Points")
+_ordersLabel = NodePath("../UI/OrdersCount")
+_gameOverPanel = NodePath("../UI/GameOverPanel")
+_cellsContainer = NodePath("../Board/Cells")
+_elementsContainer = NodePath("../Board/Elements")

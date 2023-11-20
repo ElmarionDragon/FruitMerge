@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8raa7fkc6m8h"]
+
+[ext_resource type="Script" path="res://Scripts/Cell.cs" id="1_igj32"]
+[ext_resource type="Texture2D" uid="uid://c2hbotlcx0ivh" path="res://Images/Cell.png" id="2_bucvy"]
+
+[node name="Cell" type="Node2D"]
+script = ExtResource("1_igj32")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_bucvy")

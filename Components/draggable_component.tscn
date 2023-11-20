@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://64g1yf18fl6d"]
+
+[ext_resource type="Script" path="res://Components/DraggableComponent.cs" id="1_tj4xn"]
+
+[node name="DraggableComponent" type="TextureButton"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_tj4xn")
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]

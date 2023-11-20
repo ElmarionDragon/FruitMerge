@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://blci2m76rtd5g"]
+
+[ext_resource type="Script" path="res://Scripts/GameElement.cs" id="1_uralt"]
+[ext_resource type="PackedScene" uid="uid://64g1yf18fl6d" path="res://Components/draggable_component.tscn" id="2_ya3nq"]
+[ext_resource type="Texture2D" uid="uid://baik6dr7nuj48" path="res://Images/ConfettiGreen.png" id="3_1as1o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_btxf2"]
+size = Vector2(43, 42)
+
+[sub_resource type="Gradient" id="Gradient_05286"]
+colors = PackedColorArray(0.91, 0.91, 0.91, 1, 1, 0.835294, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nfs1b"]
+gradient = SubResource("Gradient_05286")
+
+[sub_resource type="Curve" id="Curve_28eyj"]
+_data = [Vector2(0.0131579, 0.336842), 0.0, 0.0, 0, 0, Vector2(0.991228, 0.0842105), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_igawl"]
+curve = SubResource("Curve_28eyj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xa5w8"]
+emission_shape = 1
+emission_sphere_radius = 39.78
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 98, 0)
+initial_velocity_min = 150.79
+initial_velocity_max = 365.08
+angular_velocity_min = 297.14
+angular_velocity_max = 297.14
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_curve = SubResource("CurveTexture_igawl")
+color_ramp = SubResource("GradientTexture1D_nfs1b")
+
+[node name="GameElement2" type="Sprite2D" node_paths=PackedStringArray("_effect", "_draggableComponent")]
+script = ExtResource("1_uralt")
+_effect = NodePath("GPUParticleEffect")
+_draggableComponent = NodePath("DraggableComponent")
+
+[node name="Image" type="Sprite2D" parent="."]
+
+[node name="Level" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 25.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DraggableComponent" parent="." instance=ExtResource("2_ya3nq")]
+offset_left = -20.0
+offset_top = -19.0
+offset_right = 21.0
+offset_bottom = 23.0
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_btxf2")
+
+[node name="GPUParticleEffect" type="GPUParticles2D" parent="."]
+visible = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_xa5w8")
+texture = ExtResource("3_1as1o")

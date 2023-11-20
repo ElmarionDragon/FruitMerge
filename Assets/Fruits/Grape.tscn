@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbbljjjpsne37"]
+
+[ext_resource type="Texture2D" uid="uid://dqxyv0ggs2i7g" path="res://Images/Fruits/Grape.png" id="2_xj1ia"]
+
+[node name="Grape" type="Node2D"]
+
+[node name="Image" type="Sprite2D" parent="."]
+scale = Vector2(0.143127, 0.143127)
+texture = ExtResource("2_xj1ia")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjo5hnoglxtrq"]
+
+[ext_resource type="Texture2D" uid="uid://dhtcjjngk8ull" path="res://Images/Fruits/Strawberry.png" id="1_wfl15"]
+
+[node name="Strawberry" type="Node2D"]
+
+[node name="Image" type="Sprite2D" parent="."]
+position = Vector2(0, -9.53674e-07)
+scale = Vector2(0.143799, 0.143799)
+texture = ExtResource("1_wfl15")
